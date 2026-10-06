@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Painel leve para explorar indicadores climáticos de municípios brasileiros." />
+    <meta name="theme-color" content="#0d1b2a" />
+    <title>Meteora — clima municipal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="module" src="js/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo principal</a>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navegação e filtros">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div>
+            <p class="eyebrow">Meteora</p>
+            <p class="brand-title">clima municipal</p>
+          </div>
+        </div>
+
+        <div class="sidebar-rule"></div>
+
+        <section class="filter-section" aria-labelledby="explorar-title">
+          <div class="section-kicker"><span class="section-number">01</span><h2 id="explorar-title">Explorar</h2></div>
+          <div class="field-group">
+            <label for="busca">Buscar município</label>
+            <div class="input-with-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.8"></circle><path d="m16.2 16.2 4.2 4.2"></path></svg>
+              <input id="busca" type="search" placeholder="Ex.: Recife" autocomplete="off" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label for="regiao">Região</label>
+            <select id="regiao">
+              <option value="all">Todas as regiões</option>
+              <option value="Norte">Norte</option>
+              <option value="Nordeste">Nordeste</option>
+              <option value="Centro-Oeste">Centro-Oeste</option>
+              <option value="Sudeste">Sudeste</option>
+              <option value="Sul">Sul</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="perfil">Perfil climático</label>
+            <select id="perfil">
+              <option value="all">Todos os perfis</option>
+              <option value="Tropical úmido">Tropical úmido</option>
+              <option value="Tropical sazonal">Tropical sazonal</option>
+              <option value="Semiárido">Semiárido</option>
+              <option value="Subtropical">Subtropical</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="tip-card" aria-labelledby="dica-title">
+          <div class="tip-icon" aria-hidden="true">i</div>
+          <div>
+            <h2 id="dica-title">Dica rápida</h2>
+            <p>Use a consulta demo para buscar uma previsão atual no Open-Meteo. A base local continua disponível sem conexão.</p>
+          </div>
+        </section>
+
+        <div class="sidebar-footer">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>Base local disponível</span>
+        </div>
+      </aside>
+
+      <main id="conteudo" class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow accent">Painel de observação</p>
+            <h1>Leitura do clima, <em>sem ruído.</em></h1>
+          </div>
+          <div class="topbar-meta">
+            <span class="last-updated" id="last-updated">Dados locais · agora</span>
+            <span class="connection-pill" id="connection-pill"><span class="status-dot" aria-hidden="true"></span><span id="connection-label">Modo local</span></span>
+          </div>
+        </header>
+
+        <section class="status-region" id="status-region" aria-live="polite" aria-atomic="true">
+          <div class="status-message status-info" id="status-message">
+            <span class="status-symbol" aria-hidden="true">↗</span>
+            <span>Pronto para explorar a base local.</span>
+          </div>
+        </section>
+
+        <section class="hero-grid" aria-labelledby="selected-title">
+          <div class="selected-location">
+            <p class="eyebrow accent">Município em foco</p>
+            <div class="location-heading">
+              <div>
+                <h2 id="selected-title">Curitiba</h2>
+                <p id="selected-subtitle">Paraná · Sul · Subtropical</p>
+              </div>
+              <div class="location-badge" aria-hidden="true">PR</div>
+            </div>
+            <div class="hero-temperature"><span id="hero-temp">18°</span><span class="hero-degree-note">C agora</span></div>
+            <p class="hero-summary" id="hero-summary">Nublado com aberturas de sol</p>
+            <div class="hero-actions">
+              <button class="button button-primary" id="demo-button" type="button">
+                <span class="button-icon" aria-hidden="true">↻</span>
+                Consultar demo ao vivo
+              </button>
+              <button class="button button-secondary" id="local-button" type="button">Usar dados locais</button>
+            </div>
+            <p class="helper-text">A demo consulta apenas o Open-Meteo e não exige chave de API.</p>
+          </div>
+          <div class="hero-insight">
+            <div class="insight-topline"><span>Leitura rápida</span><span id="hero-date">Hoje</span></div>
+            <div class="insight-visual" aria-hidden="true">
+              <svg viewBox="0 0 420 220" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="hero-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9f264" stop-opacity=".34"/><stop offset="1" stop-color="#c9f264" stop-opacity="0"/></linearGradient>
+                </defs>
+                <path class="hero-grid-line" d="M0 44H420M0 110H420M0 176H420" />
+                <path id="hero-chart-area" class="hero-chart-area" d="M0 170 L70 145 L140 154 L210 96 L280 115 L350 66 L420 80 L420 220 L0 220 Z" />
+                <path id="hero-chart-line" class="hero-chart-line" d="M0 170 L70 145 L140 154 L210 96 L280 115 L350 66 L420 80" />
+              </svg>
+              <div class="insight-legend"><span class="legend-line"></span><span>temperatura próxima de 24h</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="metric-grid" aria-label="Resumo do município">
+          <article class="metric-card">
+            <div class="metric-label"><span class="metric-icon temp-icon" aria-hidden="true">°</span><span>Temperatura</span></div>
+            <strong id="metric-temp">18°</strong>
+            <span class="metric-detail" id="metric-temp-detail">mín 14° · máx 22°</span>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label"><span class="metric-icon rain-icon" aria-hidden="true">∿</span><span>Chuva hoje</span></div>
+            <strong id="metric-rain">12<span class="unit">mm</span></strong>
+            <span class="metric-detail" id="metric-rain-detail">probabilidade moderada</span>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label"><span class="metric-icon humidity-icon" aria-hidden="true">◌</span><span>Umidade</span></div>
+            <strong id="metric-humidity">78<span class="unit">%</span></strong>
+            <span class="metric-detail" id="metric-humidity-detail">sensação confortável</span>
+          </article>
+          <article class="metric-card">
+            <div class="metric-label"><span class="metric-icon wind-icon" aria-hidden="true">≋</span><span>Vento</span></div>
+            <strong id="metric-wind">14<span class="unit">km/h</span></strong>
+            <span class="metric-detail" id="metric-wind-detail">sudeste · leve</span>
+          </article>
+        </section>
+
+        <section class="dashboard-grid">
+          <article class="panel panel-chart">
+            <div class="panel-heading">
+              <div><p class="eyebrow accent">Tendência</p><h2>Temperatura ao longo do dia</h2></div>
+              <span class="panel-note">próximas 24h</span>
+            </div>
+            <div class="chart-wrap">
+              <svg id="temperature-chart" class="data-chart" viewBox="0 0 720 220" role="img" aria-label="Gráfico de temperatura ao longo do dia"></svg>
+            </div>
+            <div class="chart-axis" id="temperature-axis" aria-hidden="true"></div>
+          </article>
+
+          <article class="panel panel-rain">
+            <div class="panel-heading">
+              <div><p class="eyebrow accent">Precipitação</p><h2>Chuva acumulada</h2></div>
+              <span class="panel-note">últimos 7 dias</span>
+            </div>
+            <div class="rain-chart" id="rain-chart" aria-label="Gráfico de chuva acumulada nos últimos sete dias"></div>
+            <div class="rain-footnote"><span class="rain-swatch"></span><span>mm registrados</span><strong id="rain-total">42 mm</strong></div>
+          </article>
+        </section>
+
+        <section class="panel forecast-panel">
+          <div class="panel-heading">
+            <div><p class="eyebrow accent">Horizonte curto</p><h2>Próximos dias</h2></div>
+            <span class="panel-note" id="forecast-note">base local</span>
+          </div>
+          <div class="forecast-list" id="forecast-list"></div>
+        </section>
+
+        <section class="panel municipalities-panel" aria-labelledby="municipios-title">
+          <div class="panel-heading table-heading">
+            <div><p class="eyebrow accent">Base explorável</p><h2 id="municipios-title">Municípios acompanhados</h2></div>
+            <span class="result-count" id="result-count">12 municípios</span>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <caption class="visually-hidden">Municípios disponíveis na base local</caption>
+              <thead><tr><th scope="col">Município</th><th scope="col">Estado</th><th scope="col">Região</th><th scope="col">Perfil</th><th scope="col">Ação</th></tr></thead>
+              <tbody id="municipality-rows"></tbody>
+            </table>
+          </div>
+          <p class="empty-state" id="empty-state" hidden>Nenhum município encontrado. Tente outra busca ou remova um filtro.</p>
+        </section>
+
+        <footer class="page-footer">
+          <span>Dados locais para demonstração · previsão opcional via <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a></span>
+          <span>Sem chave · sem cadastro · sem persistência</span>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
