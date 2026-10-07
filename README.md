@@ -1,4 +1,5 @@
 # Painel Clima Municípios
+[![CI](https://github.com/Mateusmfmd/painel-clima-municipios/actions/workflows/ci.yml/badge.svg)](https://github.com/Mateusmfmd/painel-clima-municipios/actions/workflows/ci.yml)
 
 Painel web responsivo para consultar municípios de uma base local e exibir clima atual e previsão horária. A interface funciona offline com dados locais e pode consultar o Open-Meteo quando a opção de atualização online é usada.
 
